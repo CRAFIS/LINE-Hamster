@@ -35,11 +35,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
-    if '動画' in text or 'ビデオ' in text:
+    if want_video(text):
         query = "#ハムスターのいる生活 filter:videos"
         video_url, preview_url = get_video(query)
-        print(video_url)
-        print(preview_url)
         line_bot_api.reply_message(
             event.reply_token,
             VideoSendMessage(original_content_url=video_url, preview_image_url=preview_url))
@@ -48,6 +46,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=reply_text))
+
+def want_video(text):
+    words = ['動画', '映像', 'ビデオ', 'ムービー']
+    return True in [word in text for word in words]
 
 def get_reply(text):
     url = "https://app.cotogoto.ai/webapi/noby.json"
