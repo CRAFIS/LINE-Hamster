@@ -38,6 +38,8 @@ def handle_message(event):
     if '動画' in text or 'ビデオ' in text:
         query = "#ハムスターのいる生活 filter:videos"
         video_url, preview_url = get_video(query)
+        print(video_url)
+        print(preview_url)
         line_bot_api.reply_message(
             event.reply_token,
             VideoSendMessage(original_content_url=video_url, preview_image_url=preview_url))
@@ -72,13 +74,17 @@ def get_video(query):
     }
     res = twitter.get(url, params = params)
     tweets = json.loads(res.text)["statuses"]
-    tweet = random.choice(tweets)
-    tweet = tweet.get("retweeted_status", tweet)
-    variants = tweet["extended_entities"]["media"][0]["video_info"]["variants"]
-    variants = [variant for variant in variants if variant.get("bitrate")]
-    video_url = max(variants, key = lambda x: x["bitrate"])["url"]
-    preview_url = tweet["extended_entities"]["media"][0]["media_url"]
-    return video_url, preview_url
+    random.shuffle(tweets)
+    for tweet in tweets:
+        try:
+            tweet = tweet.get("retweeted_status", tweet)
+            variants = tweet["extended_entities"]["media"][0]["video_info"]["variants"]
+            variants = [variant for variant in variants if variant.get("bitrate")]
+            video_url = max(variants, key = lambda x: x["bitrate"])["url"]
+            preview_url = tweet["extended_entities"]["media"][0]["media_url"]
+            return video_url, preview_url
+        except:
+            pass
 
 if __name__ == "__main__":
 #    app.run()
