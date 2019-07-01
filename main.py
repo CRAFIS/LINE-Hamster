@@ -81,6 +81,7 @@ def get_video(query):
             variants = tweet["extended_entities"]["media"][0]["video_info"]["variants"]
             variants = [variant for variant in variants if variant.get("bitrate")]
             video_url = max(variants, key = lambda x: x["bitrate"])["url"]
+            video_url = video_url.split('?')[0]
             preview_url = tweet["extended_entities"]["media"][0]["media_url"]
             return video_url, preview_url
         except:
