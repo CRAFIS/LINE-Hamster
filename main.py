@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, VideoSendMessage
 import os, requests, json
 
 app = Flask(__name__)
@@ -34,20 +34,33 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    text = event.message.text
+    if '動画' in text or 'ビデオ' in text:
+        video_url = "https://video.twimg.com/ext_tw_video/1145316011974877190/pu/vid/1280x720/RdiweV650PpxBqH8.mp4"
+        preview_url = "https://pbs.twimg.com/ext_tw_video_thumb/1145316011974877190/pu/img/iL6-Bzc-Z4EygSlZ.jpg"
+        line_bot_api.reply_message(
+            event.reply_token,
+            VideoSendMessage(original_content_url=video_url, preview_image_url=preview_url))
+    else:
+        reply_text = get_reply(text)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=reply_text))
+
+def get_reply(text):
     url = "https://app.cotogoto.ai/webapi/noby.json"
     params = {
         "appkey": COTOGOTO_APPKEY,
-        "text": event.message.text
+        "text": text
     }
     try:
         res = requests.get(url, params = params, timeout = 5.0)
         res = json.loads(res.text)
-        text = res['text'] + "🐹"
+        reply_text = res['text'] + "🐹"
     except:
-        text = "🐹💨🐹💨🐹💨"
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=text))
+        reply_text = "🐹💨🐹💨🐹💨"
+    return reply_text
+
 
 if __name__ == "__main__":
 #    app.run()
