@@ -3,7 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, VideoSendMessage
 from requests_oauthlib import OAuth1Session
-import os, requests, json, random
+import os, requests, json, random, pykakasi
 
 app = Flask(__name__)
 
@@ -48,8 +48,13 @@ def handle_message(event):
             TextSendMessage(text=reply_text))
 
 def want_video(text):
-    words = ['動画', '映像', 'ビデオ', 'ムービー']
-    return True in [word in text for word in words]
+    words = ['douga', 'eizou', 'bideo', 'mu-bi-']
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('H', 'a')
+    kakasi.setMode('K', 'a')
+    kakasi.setMode('J', 'a')
+    conv = kakasi.getConverter()
+    return True in [word in conv.do(text) for word in words]
 
 def get_reply(text):
     url = "https://app.cotogoto.ai/webapi/noby.json"
