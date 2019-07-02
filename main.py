@@ -36,7 +36,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
     if want_video(text):
-        query = "#ハムスターのいる生活 filter:videos"
+        query = "#ハムスター OR #ハムスターのいる生活 OR #ハムスター好きと繋がりたい filter:videos"
         video_url, preview_url = get_video(query)
         line_bot_api.reply_message(
             event.reply_token,
