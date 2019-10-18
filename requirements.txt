@@ -1,4 +1,4 @@
-Flask==1.0.0
-line-bot-sdk==1.5.0
-requests-oauthlib==1.2.0
-pykakasi==0.96
+Flask
+line-bot-sdk
+requests-oauthlib
+pykakasi
