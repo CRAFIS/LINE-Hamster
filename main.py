@@ -37,12 +37,14 @@ def handle_message(event):
     text = event.message.text
     if want_video(text):
         reply_text = '僕の仲間を呼ぶでち🐹'
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply_text))
         query = '#ハムスター OR #ハムスターのいる生活 OR #ハムスター好きと繋がりたい filter:videos'
         video_url, preview_url = get_video(query)
         line_bot_api.reply_message(
             event.reply_token,
-            VideoSendMessage(original_content_url = video_url, preview_image_url = preview_url)
+            [
+                TextSendMessage(text = reply_text),
+                VideoSendMessage(original_content_url = video_url, preview_image_url = preview_url)
+            ]
         )
     else:
         reply_text = get_reply(text)
