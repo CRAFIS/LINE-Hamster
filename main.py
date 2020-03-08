@@ -51,13 +51,14 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply_text))
 
 def want_video(text):
-    words = ['douga', 'eizou', 'bideo', 'mu-bi-', 'hamusuta-', 'hamutyann']
+    words = ['douga', 'eizou', 'bideo', 'muubii', 'hamusuta', 'hamuchan']
     kakasi = pykakasi.kakasi()
     kakasi.setMode('H', 'a')
     kakasi.setMode('K', 'a')
     kakasi.setMode('J', 'a')
-    conv = kakasi.getConverter()
-    return True in [word in conv.do(text) for word in words]
+    converter = kakasi.getConverter()
+    converted_text  = converter.do(text)
+    return True in [word in converted_text for word in words]
 
 def get_reply(text):
     url = 'https://app.cotogoto.ai/webapi/noby.json'
