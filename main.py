@@ -51,7 +51,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply_text))
 
 def want_video(text):
-    words = ['douga', 'eizou', 'bideo', 'muubii', 'hamusuta', 'hamuchan']
+    words = ['douga', 'eizou', 'bideo', 'mu-bi-', 'hamusuta', 'hamuchan']
     kakasi = pykakasi.kakasi()
     kakasi.setMode('H', 'a')
     kakasi.setMode('K', 'a')
