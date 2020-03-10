@@ -67,7 +67,7 @@ def get_reply(text):
         'text': text
     }
     try:
-        res = requests.get(url, params = params, timeout = 5.0)
+        res = requests.get(url, params = params, timeout = 10)
         res = json.loads(res.text)
         text = res['text']
         idx = 0
