@@ -6,9 +6,9 @@
 
 ```
 $ heroku create
-$ heroku config:set CHANNEL_ACCESS_TOKEN="<Your Access Token>"
-$ heroku config:set CHANNEL_SECRET="<Your Channel Secret>"
-$ heroku config:set COTOGOTO_APPKEY="<Your CotoGoto App Key>"
+$ heroku config:set CHANNEL_ACCESS_TOKEN="<YOUR ACCESS TOKEN>"
+$ heroku config:set CHANNEL_SECRET="<YOUR CHANNEL SECRET>"
+$ heroku config:set COTOGOTO_APPKEY="<YOUR COTOGOTO APP KEY>"
 $ heroku config:set TWITTER_CONSUMER_KEY="<YOUR CONSUMER KEY>"
 $ heroku config:set TWITTER_CONSUMER_SECRET="<YOUR CONSUMER SECRET>"
 $ heroku config:set TWITTER_ACCESS_TOKEN="<YOUR ACCESS TOKEN>"
