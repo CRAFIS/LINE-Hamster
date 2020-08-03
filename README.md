@@ -1,4 +1,4 @@
-# LINE-Hamster-Bot
+# LINE-Hamchin-Bot
 
 ![LINE](https://i.imgur.com/LsApodf.png)
 
