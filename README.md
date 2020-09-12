@@ -2,16 +2,58 @@
 
 ![LINE](https://i.imgur.com/LsApodf.png)
 
-## Deployment
+## Lambda Function
+
+| Attribute | Content |
+| - | - |
+| Name | LineHamchinBot |
+| Runtime | Python 3.8 |
+| Memory | 128 MB |
+| Timeout | 10 seconds |
+| File | lambda_function.py |
+
+### Environmental Variable
+
+| Key |
+| - |
+| CHANNEL_ACCESS_TOKEN |
+| CHANNEL_SECRET |
+| COTOGOTO_APPKEY |
+| TWITTER_CONSUMER_KEY |
+| TWITTER_CONSUMER_SECRET |
+| TWITTER_ACCESS_TOKEN |
+| TWITTER_ACCESS_SECRET |
+
+### Role
+
+| Attribute | Content |
+| - | - |
+| Name | LambdaAccess2CloudWatchLogs |
+| Policy | CloudWatchLogsFullAccess |
+
+## Lambda Layer
+
+| Attribute | Content |
+| - | - |
+| Name | LineHamchinBot |
+| Runtime | Python 3.8 |
+
+To create zip file:
 
 ```
-$ heroku create
-$ heroku config:set CHANNEL_ACCESS_TOKEN="EXAMPLE"
-$ heroku config:set CHANNEL_SECRET="EXAMPLE"
-$ heroku config:set COTOGOTO_APPKEY="EXAMPLE"
-$ heroku config:set TWITTER_CONSUMER_KEY="EXAMPLE"
-$ heroku config:set TWITTER_CONSUMER_SECRET="EXAMPLE"
-$ heroku config:set TWITTER_ACCESS_TOKEN="EXAMPLE"
-$ heroku config:set TWITTER_ACCESS_SECRET="EXAMPLE"
-$ git push heroku master
+$ pip3 install -t ./python -r requirements.txt
+$ zip -r package.zip ./python
 ```
+
+## API Gateway
+
+### / - POST
+
+- Use Lambda Proxy Integration.
+- Use Default Timeout.
+
+#### HTTP Request Header
+
+| Key | Required |
+| - | :-: |
+| X-Line-Signature | ○ |
