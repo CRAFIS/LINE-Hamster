@@ -12,6 +12,13 @@
 | Timeout | 10 seconds |
 | File | lambda_function.py |
 
+### Role
+
+| Attribute | Content |
+| - | - |
+| Name | LambdaAccess2CloudWatchLogs |
+| Policy | CloudWatchLogsFullAccess |
+
 ### Environmental Variable
 
 | Key |
@@ -23,13 +30,6 @@
 | TWITTER_CONSUMER_SECRET |
 | TWITTER_ACCESS_TOKEN |
 | TWITTER_ACCESS_SECRET |
-
-### Role
-
-| Attribute | Content |
-| - | - |
-| Name | LambdaAccess2CloudWatchLogs |
-| Policy | CloudWatchLogsFullAccess |
 
 ## Lambda Layer
 
@@ -47,7 +47,7 @@ $ zip -r package.zip ./python
 
 ## API Gateway
 
-### / - POST
+### POST /
 
 - Use Lambda Proxy Integration.
 - Use Default Timeout.
