@@ -1,6 +1,6 @@
 # LINE-Hamchin-Bot
 
-![LINE](https://i.imgur.com/LsApodf.png)
+![LINE](https://user-images.githubusercontent.com/25927185/109787539-ace7ce00-7c51-11eb-8758-523ba582a619.png)
 
 ## Lambda Function
 
