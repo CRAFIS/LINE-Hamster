@@ -110,7 +110,7 @@ def message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = text))
 
 def lambda_handler(event, context):
-    signature = event['headers']['X-Line-Signature']
+    signature = event['headers']['x-line-signature']
     body = event['body']
     try:
         handler.handle(body, signature)
