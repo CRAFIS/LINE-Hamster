@@ -38,10 +38,10 @@
 | Name | LineHamchinBot |
 | Runtime | Python 3.8 |
 
-To create zip file:
+#### Create Zip File
 
-```
-$ pip3 install -t ./python -r requirements.txt
+```sh
+$ pip install -t ./python -r requirements.txt
 $ zip -r package.zip ./python
 ```
 
